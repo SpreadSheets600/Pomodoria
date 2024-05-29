@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
   <title>Pomodoria</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="app">
     <h1 class="title">Pomodoria</h1>
-    <div class="app-counter-box">
-      <input type="number" class="minutes" placeholder="Enter Focus Time" />:<input type="number" class="seconds" value="00" min="0" max="59" />
-      <div class="timer hidden">
-        <span class="minutes-display">00</span>:<span class="seconds-display">00</span>
-        <div class="progress-bar">
-          <div class="progress"></div>
-        </div>
+    <div class="timer">
+      <span class="minutes-display">25</span>:<span class="seconds-display">00</span>
+      <div class="progress-bar">
+        <div class="progress"></div>
       </div>
+    </div>
+    <div class="custom-timer">
+      <input type="number" id="customMinutes" placeholder="Minutes" min="0">
+      <input type="number" id="customSeconds" placeholder="Seconds" min="0" max="59">
+      <button id="setCustomTimer">Set Timer</button>
     </div>
     <div class="buttons">
       <button class="start">START</button>
