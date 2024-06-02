@@ -14,3 +14,7 @@ A Pomodoro Timer
 ![image](https://github.com/SpreadSheets600/Pomodoria/assets/115402296/5d3c2cb3-c3b0-4772-b742-44b739defe0e)
 
 ![image](https://github.com/SpreadSheets600/Pomodoria/assets/115402296/f4476f07-eaa6-4ab0-8da5-3d3a170d3785)
+
+
+### Contributions ?
+Yes it's open for you contribute and make it good, so feel free to do so!

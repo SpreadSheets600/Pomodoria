@@ -14,16 +14,6 @@ body {
   zoom: 70%;
 }
 
-.title {
-  font-weight: 700;
-  font-size: 3em;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 1px;
-  left: 1cm;
-}
-
 button {
   background-color: rgba(255, 255, 255, 0.8);
   color: #333;
@@ -41,6 +31,16 @@ button:hover {
   color: #6a11cb;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: scale(1.05);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 3em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 1px;
+  left: 1cm;
 }
 
 .app-counter-box {
