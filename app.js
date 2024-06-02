@@ -29,7 +29,20 @@ const customTimer = document.querySelector(".custom-timer");
 
 let currentTaskLi = null;
 
-const backgroundImages = ['url("Images/1.png")', 'url("Images/2.png")'];
+const backgroundVideos = [
+  "Videos/1.mp4",
+  "Videos/2.mp4",
+  "Videos/3.mp4",
+  "Videos/4.mp4",
+  "Videos/5.mp4",
+];
+
+function updateBackgroundVideo() {
+  const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
+  backgroundVideo.src = backgroundVideos[randomIndex];
+}
+
+updateBackgroundVideo();
 
 const updateTimerDisplay = () => {
   const minutes = Math.floor(totalSeconds / 60);
@@ -65,8 +78,6 @@ const startTimer = () => {
     }, 1000);
     document.querySelector(".timer").classList.add("enlarged");
     appElement.classList.add("right");
-    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
-    document.body.style.backgroundImage = backgroundImages[randomIndex];
   }
 };
 
@@ -99,7 +110,6 @@ const resetTimer = () => {
     document.querySelector(".timer").classList.remove("zoom-reset");
   }, 500);
   appElement.classList.remove("right");
-  document.body.style.backgroundImage = "";
 };
 
 const addTask = () => {
@@ -225,4 +235,3 @@ toggleTasksButton.addEventListener("click", () => {
 });
 
 addTaskButton.addEventListener("click", addTask);
-

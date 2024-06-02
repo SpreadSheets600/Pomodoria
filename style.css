@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(120deg, #000000 0%, #000000 100%);
+  background-image: none;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,6 +12,8 @@ body {
   margin: 0;
   font-family: "Roboto", sans-serif;
   zoom: 70%;
+  position: relative;
+  overflow: hidden;
 }
 
 button {
@@ -70,8 +72,8 @@ button:hover {
   animation: fadeIn 1s ease;
   position: fixed;
   transition: all 0.5s ease; /* Add transition for smooth movement */
-  top: auto;
-  left: auto;
+  top: -7cm;
+  right: 1cm;
   margin-top: 8cm;
 }
 
@@ -353,4 +355,13 @@ input[type="text"]:focus {
 /* Add to your existing CSS */
 .set-task-button {
   margin-left: 10px;
+}
+
+#backgroundVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
 }
