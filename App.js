@@ -15,6 +15,7 @@ const customMinutesInput = document.getElementById("customMinutes");
 const customSecondsInput = document.getElementById("customSeconds");
 const toggleCurrentTaskButton = document.getElementById("toggleCurrentTask");
 const currentTaskDiv = document.getElementById("currentTask");
+const appElement = document.querySelector(".app");
 
 const updateTimerDisplay = () => {
   const minutes = Math.floor(totalSeconds / 60);
@@ -24,8 +25,14 @@ const updateTimerDisplay = () => {
   minutesDisplay.textContent = formattedTime;
 };
 
+const backgroundImages = [
+  'url("Images/1.png")',
+  'url("Images/2.png")'
+];
+
+
 const updateProgressBar = () => {
-  const progress = (1 - totalSeconds / (25 * 60)) * 100;
+  const progress = (1 - totalSeconds / (parseInt(customMinutesInput.value) * 60)) * 100;
   progressBar.style.width = `${progress}%`;
 };
 
@@ -46,9 +53,11 @@ const startTimer = () => {
       }
     }, 1000);
     document.querySelector(".timer").classList.add("enlarged"); // Add enlarged class when timer starts
+    appElement.classList.add("left"); // Move the app to the top left
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    document.body.style.backgroundImage = backgroundImages[randomIndex];
   }
 };
-
 
 const stopTimer = () => {
   clearInterval(timerInterval);
@@ -78,8 +87,9 @@ const resetTimer = () => {
   setTimeout(() => {
     document.querySelector(".timer").classList.remove("zoom-reset"); // Remove zoom-reset class after a short delay
   }, 500);
+  appElement.classList.remove("left"); // Move the app back to the center
+  document.body.style.backgroundImage = '';
 };
-
 
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
@@ -101,7 +111,6 @@ toggleMusicButton.addEventListener("click", () => {
 });
 
 musicBox.classList.toggle("hide");
-
 
 function reloadIframe(iframe) {
   iframe.src = iframe.src;
@@ -130,7 +139,6 @@ saveLinkButton.addEventListener("click", () => {
   }
 });
 
-
 const settingsButton = document.getElementById("settingsButton");
 const customTimer = document.querySelector(".custom-timer");
 
@@ -142,22 +150,26 @@ toggleTasksButton.addEventListener('click', () => {
   taskList.classList.toggle('hide');
 });
 
+const addTaskButton = document.getElementById("addTaskButton");
+const taskInput = document.getElementById("taskInput");
+const tasks = document.getElementById("tasks");
+
 addTaskButton.addEventListener('click', () => {
   const taskText = taskInput.value.trim();
   if (taskText) {
     const li = document.createElement('li');
     li.textContent = taskText;
-    
+
     const deleteButton = document.createElement('button');
     const deleteSymbol = document.createElement('span');
     deleteSymbol.className = 'material-symbols-outlined';
     deleteSymbol.textContent = 'delete';
     deleteButton.appendChild(deleteSymbol);
-    
+
     deleteButton.addEventListener('click', () => {
       tasks.removeChild(li);
     });
-    
+
     li.appendChild(deleteButton);
     tasks.appendChild(li);
     taskInput.value = '';
@@ -168,4 +180,3 @@ addTaskButton.addEventListener('click', () => {
 toggleCurrentTaskButton.addEventListener('click', () => {
   currentTaskDiv.classList.toggle('hide');
 });
-
