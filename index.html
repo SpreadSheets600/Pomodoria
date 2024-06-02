@@ -22,6 +22,11 @@
         </div>
       </div>
 
+      <div id="currentTask" class="hide">
+        <input type="checkbox" id="currentTaskCheckbox" />
+        <span id="currentTaskText"></span>
+      </div>
+
       <div class="custom-timer hide" id="customTimerBox">
         <input type="number" id="customMinutes" placeholder="Minutes" min="0" />
         <input
@@ -43,10 +48,10 @@
 
     <div class="musicbutton" id="musicButton">
       <button id="toggleMusic">
-        <span class="material-symbols-outlined"> music_note </span>
+        <span class="material-symbols-outlined">music_note</span>
       </button>
       <button id="toggleTasks">
-        <span class="material-symbols-outlined"> task_alt </span>
+        <span class="material-symbols-outlined">task_alt</span>
       </button>
     </div>
 
@@ -55,13 +60,13 @@
       <ul id="tasks"></ul>
       <input type="text" id="taskInput" placeholder="Add a new task" />
       <button id="addTaskButton">
-        <span class="material-symbols-outlined"> add_circle </span>
+        <span class="material-symbols-outlined">add_circle</span>
       </button>
     </div>
 
     <div class="settings">
       <button id="settingsButton">
-        <span class="material-symbols-outlined"> settings </span>
+        <span class="material-symbols-outlined">settings</span>
       </button>
     </div>
 

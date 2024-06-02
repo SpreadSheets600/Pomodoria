@@ -3,7 +3,6 @@ let totalSeconds = 25 * 60;
 let isRunning = false;
 
 const minutesDisplay = document.querySelector(".minutes-display");
-const secondsDisplay = document.querySelector(".seconds-display");
 const progressBar = document.querySelector(".progress");
 const startButton = document.querySelector(".start");
 const stopButton = document.querySelector(".stop");
@@ -13,13 +12,13 @@ const toggleTasksButton = document.getElementById("toggleTasks");
 const setCustomTimerButton = document.getElementById("setCustomTimer");
 const customMinutesInput = document.getElementById("customMinutes");
 const customSecondsInput = document.getElementById("customSeconds");
-const toggleCurrentTaskButton = document.getElementById("toggleCurrentTask");
 const currentTaskDiv = document.getElementById("currentTask");
+const currentTaskText = document.getElementById("currentTaskText");
+const currentTaskCheckbox = document.getElementById("currentTaskCheckbox");
 const appElement = document.querySelector(".app");
 const addTaskButton = document.getElementById("addTaskButton");
 const taskInput = document.getElementById("taskInput");
 const tasks = document.getElementById("tasks");
-const musicFrame = document.getElementById("playlistFrame");
 const toggleMusicButton = document.getElementById("toggleMusic");
 const spotifyLinkInput = document.getElementById("spotifyLink");
 const saveLinkButton = document.getElementById("saveLink");
@@ -27,6 +26,8 @@ const playlistFrame = document.getElementById("playlistFrame");
 const musicBox = document.getElementById("musicBox");
 const settingsButton = document.getElementById("settingsButton");
 const customTimer = document.querySelector(".custom-timer");
+
+let currentTaskLi = null;
 
 const backgroundImages = ['url("Images/1.png")', 'url("Images/2.png")'];
 
@@ -101,6 +102,86 @@ const resetTimer = () => {
   document.body.style.backgroundImage = "";
 };
 
+const addTask = () => {
+  const taskText = taskInput.value.trim();
+  if (taskText === "") {
+    return;
+  }
+
+  const taskLi = document.createElement("li");
+  const taskCheckbox = document.createElement("input");
+  taskCheckbox.type = "checkbox";
+  taskCheckbox.addEventListener("change", () => {
+    if (taskCheckbox.checked) {
+      taskLi.classList.add("completed");
+      updateCurrentTask(null);
+    } else {
+      taskLi.classList.remove("completed");
+      updateCurrentTask(taskLi);
+    }
+  });
+
+  const taskSpan = document.createElement("span");
+  taskSpan.textContent = taskText;
+
+  const setButton = document.createElement("button");
+  setButton.className = "set-task-button";
+  setButton.textContent = "Set";
+  setButton.addEventListener("click", () => {
+    updateCurrentTask(taskLi);
+  });
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerHTML =
+    '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.addEventListener("click", () => {
+    tasks.removeChild(taskLi);
+    updateCurrentTask(null);
+  });
+
+  taskLi.appendChild(taskCheckbox);
+  taskLi.appendChild(taskSpan);
+  taskLi.appendChild(setButton);
+  taskLi.appendChild(deleteButton);
+  tasks.appendChild(taskLi);
+  taskInput.value = "";
+
+  if (!currentTaskLi) {
+    updateCurrentTask(taskLi);
+  } else {
+    updateCurrentTask(taskLi);
+  }
+};
+
+const updateCurrentTask = (taskLi) => {
+  if (currentTaskLi) {
+    currentTaskLi.querySelector(".set-task-button").textContent = "Set";
+  }
+  currentTaskLi = taskLi;
+  if (taskLi) {
+    currentTaskText.textContent = taskLi.querySelector("span").textContent;
+    currentTaskDiv.classList.add("show");
+    taskLi.querySelector(".set-task-button").textContent = "Current";
+  } else {
+    currentTaskText.textContent = "";
+    currentTaskDiv.classList.remove("show");
+  }
+};
+
+currentTaskCheckbox.addEventListener("change", () => {
+  if (currentTaskCheckbox.checked) {
+    if (currentTaskLi) {
+      currentTaskLi.classList.add("completed");
+      currentTaskLi.querySelector("input[type='checkbox']").checked = true;
+    }
+    updateCurrentTask(null);
+  }
+});
+
+settingsButton.addEventListener("click", () => {
+  customTimer.classList.toggle("hide");
+});
+
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
 resetButton.addEventListener("click", resetTimer);
@@ -112,8 +193,6 @@ updateProgressBar();
 toggleMusicButton.addEventListener("click", () => {
   musicBox.style.display = musicBox.style.display === "none" ? "block" : "none";
 });
-
-musicBox.classList.toggle("hide");
 
 function reloadIframe(iframe) {
   iframe.src = iframe.src;
@@ -141,37 +220,9 @@ saveLinkButton.addEventListener("click", () => {
   }
 });
 
-settingsButton.addEventListener("click", () => {
-  customTimer.classList.toggle("hide");
-});
-
 toggleTasksButton.addEventListener("click", () => {
   taskList.classList.toggle("hide");
 });
 
-addTaskButton.addEventListener("click", () => {
-  const taskText = taskInput.value.trim();
-  if (taskText) {
-    const li = document.createElement("li");
-    li.textContent = taskText;
+addTaskButton.addEventListener("click", addTask);
 
-    const deleteButton = document.createElement("button");
-    const deleteSymbol = document.createElement("span");
-    deleteSymbol.className = "material-symbols-outlined";
-    deleteSymbol.textContent = "delete";
-    deleteButton.appendChild(deleteSymbol);
-
-    deleteButton.addEventListener("click", () => {
-      tasks.removeChild(li);
-    });
-
-    li.appendChild(deleteButton);
-    tasks.appendChild(li);
-    taskInput.value = "";
-    currentTaskDiv.textContent = taskText; // Set the current task
-  }
-});
-
-toggleCurrentTaskButton.addEventListener("click", () => {
-  currentTaskDiv.classList.toggle("hide");
-});

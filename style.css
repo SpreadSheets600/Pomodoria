@@ -10,7 +10,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   zoom: 70%;
 }
 
@@ -82,14 +82,14 @@ button:hover {
 }
 
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .music {
   display: none;
   position: fixed;
   bottom: 3cm;
-  left: 1cm; 
+  left: 1cm;
 }
 
 .musicbutton {
@@ -173,7 +173,7 @@ input[type="text"]:focus {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   display: inline-flex; /* Change display to inline-flex */
   align-items: center;
-  white-space: nowrap; 
+  white-space: nowrap;
 }
 
 .timer.enlarged span {
@@ -310,4 +310,47 @@ input[type="text"]:focus {
 
 #currentTask.show {
   display: block;
+}
+
+#tasks .completed span {
+  text-decoration: line-through;
+}
+
+#currentTask {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: none;
+}
+
+#currentTask.show {
+  display: block;
+}
+
+#currentTaskContainer {
+  margin-top: 20px;
+}
+
+/* Add to your existing CSS */
+#currentTask {
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  display: none;
+}
+
+#currentTask.show {
+  display: flex;
+}
+
+/* Add to your existing CSS */
+.set-task-button {
+  margin-left: 10px;
 }
