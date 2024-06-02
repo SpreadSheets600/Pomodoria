@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  zoom: 70%;
 }
 
 .title {
@@ -47,7 +48,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin: auto;
 }
 
 .timer {
@@ -67,15 +68,17 @@ button:hover {
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease;
-  position: relative;
+  position: fixed;
   transition: all 0.5s ease; /* Add transition for smooth movement */
+  top: auto;
+  left: auto;
+  margin-top: 8cm;
 }
 
-.app.left {
+.app.right {
   position: fixed;
-  top: 1cm;
+  top: -7cm;
   right: 1cm;
-  transform: none;
 }
 
 .material-symbols-outlined {
