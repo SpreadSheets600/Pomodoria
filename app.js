@@ -53,7 +53,7 @@ const startTimer = () => {
       }
     }, 1000);
     document.querySelector(".timer").classList.add("enlarged"); // Add enlarged class when timer starts
-    appElement.classList.add("left"); // Move the app to the top left
+    appElement.classList.add("right"); // Move the app to the top left
     const randomIndex = Math.floor(Math.random() * backgroundImages.length);
     document.body.style.backgroundImage = backgroundImages[randomIndex];
   }
@@ -87,7 +87,7 @@ const resetTimer = () => {
   setTimeout(() => {
     document.querySelector(".timer").classList.remove("zoom-reset"); // Remove zoom-reset class after a short delay
   }, 500);
-  appElement.classList.remove("left"); // Move the app back to the center
+  appElement.classList.remove("right"); // Move the app back to the center
   document.body.style.backgroundImage = '';
 };
 
