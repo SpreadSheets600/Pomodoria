@@ -1,5 +1,5 @@
 # Pomodoria
-A Pomodoro Timer
+An Aesthetic Pomodoro Timer Built By Me And [Param](https://github.com/paramkhodiyar)
 
 ## Features
 1. Tasks
