@@ -1,6 +1,7 @@
 let timerInterval;
 let totalSeconds = 25 * 60;
 let isRunning = false;
+let autoRestart = false;
 
 const minutesDisplay = document.querySelector(".minutes-display");
 const progressBar = document.querySelector(".progress");
@@ -26,6 +27,7 @@ const playlistFrame = document.getElementById("playlistFrame");
 const musicBox = document.getElementById("musicBox");
 const settingsButton = document.getElementById("settingsButton");
 const customTimer = document.querySelector(".custom-timer");
+const autoRestartCheckbox = document.getElementById("autoRestart");
 
 let currentTaskLi = null;
 
@@ -44,7 +46,7 @@ const backgroundVideos = [
 
 function updateBackgroundVideo() {
   const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
-  backgroundVideo.src = backgroundVideos[randomIndex];
+  document.getElementById('backgroundVideo').src = backgroundVideos[randomIndex];
 }
 
 updateBackgroundVideo();
@@ -52,16 +54,13 @@ updateBackgroundVideo();
 const updateTimerDisplay = () => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
-  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(
-    seconds
-  ).padStart(2, "0")}`;
+  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   document.title = `Pomodoria - ${formattedTime}`;
   minutesDisplay.textContent = formattedTime;
 };
 
 const updateProgressBar = () => {
-  const progress =
-    (1 - totalSeconds / (parseInt(customMinutesInput.value) * 60)) * 100;
+  const progress = (1 - totalSeconds / (parseInt(customMinutesInput.value) * 60)) * 100;
   progressBar.style.width = `${progress}%`;
 };
 
@@ -74,6 +73,10 @@ const startTimer = () => {
         clearInterval(timerInterval);
         isRunning = false;
         alert("Time's Up!");
+        if (autoRestart) {
+          totalSeconds = parseInt(customMinutesInput.value) * 60 + parseInt(customSecondsInput.value);
+          startTimer();
+        }
       }
       updateTimerDisplay();
       updateProgressBar();
@@ -147,8 +150,7 @@ const addTask = () => {
   });
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerHTML =
-    '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
   deleteButton.addEventListener("click", () => {
     tasks.removeChild(taskLi);
     updateCurrentTask(null);
@@ -176,7 +178,7 @@ const updateCurrentTask = (taskLi) => {
   if (taskLi) {
     currentTaskText.textContent = taskLi.querySelector("span").textContent;
     currentTaskDiv.classList.add("show");
-    taskLi.querySelector(".set-task-button").textContent = "Current";
+    taskLi.querySelector(".set-task-button").textContent = "Unset";
   } else {
     currentTaskText.textContent = "";
     currentTaskDiv.classList.remove("show");
@@ -240,3 +242,7 @@ toggleTasksButton.addEventListener("click", () => {
 });
 
 addTaskButton.addEventListener("click", addTask);
+
+autoRestartCheckbox.addEventListener("change", () => {
+  autoRestart = autoRestartCheckbox.checked;
+});
