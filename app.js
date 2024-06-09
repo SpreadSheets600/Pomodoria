@@ -28,9 +28,7 @@ const musicBox = document.getElementById("musicBox");
 const settingsButton = document.getElementById("settingsButton");
 const customTimer = document.querySelector(".custom-timer");
 const autoRestartCheckbox = document.getElementById("autoRestart");
-const changeBackgroundButton = document.getElementById("changeBackground");
 const settingsBox = document.querySelector(".settings-box");
-const clearTasksButton = document.getElementById("clearTasksButton");
 const customTimerButton = document.getElementById("customTimerButton");
 
 let currentTaskLi = null;
@@ -212,7 +210,7 @@ setCustomTimerButton.addEventListener("click", setCustomTimer);
 
 customTimerButton.addEventListener("click", () => {
   customTimer.classList.toggle("hide");
-})
+});
 
 updateTimerDisplay();
 updateProgressBar();
@@ -252,17 +250,19 @@ taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") addTask();
 });
 
-clearTasksButton.addEventListener("click", () => {
-  tasks.innerHTML = "";
-  updateCurrentTask(null);
-});
-
 autoRestartCheckbox.addEventListener("change", () => {
   autoRestart = autoRestartCheckbox.checked;
 });
 
-changeBackgroundButton.addEventListener("click", updateBackgroundVideo);
-
+window.addEventListener("DOMContentLoaded", () => {
+  const changeBackgroundButton = document.getElementById("changeBackground");
+  if (changeBackgroundButton) {
+    changeBackgroundButton.addEventListener("click", updateBackgroundVideo);
+  } else {
+    console.error("changeBackground Button Not Found");
+  }
+  updateBackgroundVideo(); // Call updateBackgroundVideo on page load
+});
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
