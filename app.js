@@ -28,6 +28,9 @@ const musicBox = document.getElementById("musicBox");
 const settingsButton = document.getElementById("settingsButton");
 const customTimer = document.querySelector(".custom-timer");
 const autoRestartCheckbox = document.getElementById("autoRestart");
+const changeBackgroundButton = document.getElementById("changeBackground");
+const settingsBox = document.querySelector(".settings-box");
+const clearTasksButton = document.getElementById("clearTasksButton");
 
 let currentTaskLi = null;
 
@@ -41,12 +44,13 @@ const backgroundVideos = [
   "Videos/7.mp4",
   "Videos/8.mp4",
   "Videos/9.mp4",
-  "Videos/10.mp4"
+  "Videos/10.mp4",
 ];
 
 function updateBackgroundVideo() {
   const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
-  document.getElementById('backgroundVideo').src = backgroundVideos[randomIndex];
+  document.getElementById("backgroundVideo").src =
+    backgroundVideos[randomIndex];
 }
 
 updateBackgroundVideo();
@@ -54,13 +58,16 @@ updateBackgroundVideo();
 const updateTimerDisplay = () => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
-  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(
+    seconds
+  ).padStart(2, "0")}`;
   document.title = `Pomodoria - ${formattedTime}`;
   minutesDisplay.textContent = formattedTime;
 };
 
 const updateProgressBar = () => {
-  const progress = (1 - totalSeconds / (parseInt(customMinutesInput.value) * 60)) * 100;
+  const progress =
+    (1 - totalSeconds / (parseInt(customMinutesInput.value || 25) * 60)) * 100;
   progressBar.style.width = `${progress}%`;
 };
 
@@ -72,9 +79,11 @@ const startTimer = () => {
       if (totalSeconds < 0) {
         clearInterval(timerInterval);
         isRunning = false;
-        alert("Time's Up!");
+        new Audio("notification.mp3").play();
         if (autoRestart) {
-          totalSeconds = parseInt(customMinutesInput.value) * 60 + parseInt(customSecondsInput.value);
+          totalSeconds =
+            parseInt(customMinutesInput.value || 25) * 60 +
+            parseInt(customSecondsInput.value || 0);
           startTimer();
         }
       }
@@ -104,14 +113,14 @@ const setCustomTimer = () => {
   totalSeconds = customMinutes * 60 + customSeconds;
   updateTimerDisplay();
   updateProgressBar();
-  document.querySelector(".custom-timer").classList.add("hide");
+  customTimer.classList.add("hide");
 };
 
 const resetTimer = () => {
   stopTimer();
   totalSeconds = 25 * 60;
   updateTimerDisplay();
-  updateProgressBar();
+  progressBar.style.width = "0%"; // Reset progress bar
   document.querySelector(".timer").classList.remove("enlarged");
   document.querySelector(".timer").classList.add("zoom-reset");
   setTimeout(() => {
@@ -122,9 +131,7 @@ const resetTimer = () => {
 
 const addTask = () => {
   const taskText = taskInput.value.trim();
-  if (taskText === "") {
-    return;
-  }
+  if (taskText === "") return;
 
   const taskLi = document.createElement("li");
   const taskCheckbox = document.createElement("input");
@@ -150,7 +157,8 @@ const addTask = () => {
   });
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerHTML = '<span class="material-symbols-outlined">delete</span>';
+  deleteButton.innerHTML =
+    '<span class="material-symbols-outlined">delete</span>';
   deleteButton.addEventListener("click", () => {
     tasks.removeChild(taskLi);
     updateCurrentTask(null);
@@ -165,8 +173,6 @@ const addTask = () => {
 
   if (!currentTaskLi) {
     updateCurrentTask(taskLi);
-  } else {
-    updateCurrentTask(taskLi);
   }
 };
 
@@ -177,11 +183,13 @@ const updateCurrentTask = (taskLi) => {
   currentTaskLi = taskLi;
   if (taskLi) {
     currentTaskText.textContent = taskLi.querySelector("span").textContent;
-    currentTaskDiv.classList.add("show");
+    currentTaskDiv.classList.remove("hide");
     taskLi.querySelector(".set-task-button").textContent = "Unset";
+    document.querySelector(".timer").appendChild(currentTaskDiv);
   } else {
     currentTaskText.textContent = "";
-    currentTaskDiv.classList.remove("show");
+    currentTaskDiv.classList.add("hide");
+    document.body.appendChild(currentTaskDiv); // Move current task div back to body
   }
 };
 
@@ -196,7 +204,7 @@ currentTaskCheckbox.addEventListener("change", () => {
 });
 
 settingsButton.addEventListener("click", () => {
-  customTimer.classList.toggle("hide");
+  settingsBox.classList.toggle("hide");
 });
 
 startButton.addEventListener("click", startTimer);
@@ -211,29 +219,25 @@ toggleMusicButton.addEventListener("click", () => {
   musicBox.style.display = musicBox.style.display === "none" ? "block" : "none";
 });
 
-function reloadIframe(iframe) {
-  iframe.src = iframe.src;
-}
-
 function extractPlaylistId(url) {
   const match = url.match(/\/playlist\/([a-zA-Z0-9]+)\?/);
-  if (match && match[1]) {
-    return match[1];
-  }
-  return null;
+  return match && match[1] ? match[1] : null;
 }
 
 saveLinkButton.addEventListener("click", () => {
   const newLink = spotifyLinkInput.value;
   if (newLink) {
     const playlistLink = extractPlaylistId(newLink);
-    playlistFrame.src = `https://open.spotify.com/embed/playlist/${playlistLink}`;
-    reloadIframe(playlistFrame);
-    spotifyLinkInput.value = "";
-    saveLinkButton.textContent = "Saved";
-    setTimeout(() => {
-      saveLinkButton.textContent = "Save";
-    }, 1000);
+    if (playlistLink) {
+      playlistFrame.src = `https://open.spotify.com/embed/playlist/${playlistLink}`;
+      spotifyLinkInput.value = "";
+      saveLinkButton.textContent = "Saved";
+      setTimeout(() => {
+        saveLinkButton.textContent = "Save";
+      }, 1000);
+    } else {
+      alert("Invalid Spotify playlist link");
+    }
   }
 });
 
@@ -242,7 +246,45 @@ toggleTasksButton.addEventListener("click", () => {
 });
 
 addTaskButton.addEventListener("click", addTask);
+taskInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addTask();
+});
+
+clearTasksButton.addEventListener("click", () => {
+  tasks.innerHTML = "";
+  updateCurrentTask(null);
+});
 
 autoRestartCheckbox.addEventListener("change", () => {
   autoRestart = autoRestartCheckbox.checked;
+});
+
+changeBackgroundButton.addEventListener("click", updateBackgroundVideo);
+
+customTimerButton.addEventListener("click", () => {
+  customTimer.classList.toggle("hide");
+});
+
+// Keyboard shortcuts
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey) {
+    switch (e.key) {
+      case "s":
+        startTimer();
+        break;
+      case "x":
+        stopTimer();
+        break;
+      case "r":
+        resetTimer();
+        break;
+      case "t":
+        taskList.classList.toggle("hide");
+        break;
+      case "m":
+        musicBox.style.display =
+          musicBox.style.display === "none" ? "block" : "none";
+        break;
+    }
+  }
 });

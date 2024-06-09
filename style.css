@@ -1,225 +1,183 @@
 body {
-  background-image: linear-gradient(120deg, #000000 0%, #000000 100%);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-image: linear-gradient(120deg, #000000 0%, #1a1a1a 100%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-  font-family: "Roboto", sans-serif;
-  zoom: 70%;
+  font-family: "Nunito", sans-serif;
+  overflow: hidden;
+  zoom: 80%;
+}
+
+#backgroundVideo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  filter: brightness(0.7);
 }
 
 button {
-   background-color: rgba(255, 255, 255, 0.8); 
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  padding: 12px 24px;
   font-weight: 500;
-  margin: 0 10px;
-  transition: all 0.3s ease;
+  margin: 10px;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   cursor: pointer;
-
-}*/\\
-button.start {
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: relative;
+  overflow: hidden;
+}
 
-}
-button.start span{
-  transition: all 0.3s;
-}
-button.start::before{
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: all 0.3s;
-  border-top-width: 1px;
-  border-bottom-width: 1px;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-top-color: rgba(255,255,255,0.5);
-  border-bottom-color: rgba(255,255,255,0.5);
-  transform: scale(0.1, 1);
-}
-button.hover span{
-  letter-spacing: 2px;
-}
-button.start:hover::before {
-  opacity: 1; 
-  transform: scale(1, 1); 
-}
-.button.start::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.3s;
-  background-color: rgba(255,255,255,0.1);
-}
-.button.start:hover::after {
-  opacity: 0; 
-  transform: scale(0.1, 1);
-}
 button:hover {
-  background-color: #fff;
-  color: #6a11cb;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+button:hover::after {
+  transform: scaleX(1);
 }
 
 .title {
   font-weight: 700;
-  font-size: 3em;
+  font-size: 2.5em;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   position: fixed;
-  top: 1px;
-  left: 1cm;
-}
-
-.app-counter-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
-
-.timer {
-  color: #fff;
-  font-size: 3em;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  top: 20px;
+  left: 20px;
 }
 
 .app {
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease;
-  position: fixed;
-  transition: all 0.5s ease; /* Add transition for smooth movement */
-  top: auto;
-  left: auto;
-  margin-top: 8cm;
+  transition: all 0.5s ease;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .app.right {
   position: fixed;
-  top: -7cm;
-  right: 1cm;
+  top: 80px;
+  right: 20px;
 }
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
+.button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
 .music {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   display: none;
-  position: fixed;
-  bottom: 3cm;
-  left: 1cm;
-}
-
-.musicbutton {
-  position: fixed;
-  bottom: 1cm;
-  left: 1cm;
-}
-
-.spotifylink {
-  color: #fff;
-  text-decoration: none;
-  position: relative;
 }
 
 .settings {
-  display: flex;
-  justify-content: center;
   position: fixed;
-  bottom: 1cm;
-  right: 1cm;
+  bottom: 20px;
+  right: 20px;
 }
 
 .settings-box {
-  display: none;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   animation: fadeIn 1s ease;
   position: fixed;
-  bottom: 2cm;
-  right: 1cm;
-}
-
-.settings-box input[type="number"] {
-  width: 50px;
-  text-align: center;
-}
-
-.settings-box button {
-  margin-top: 20px;
-}
-
-.settings-box.active {
-  display: block;
+  bottom: 100px;
+  right: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 input[type="number"],
 input[type="text"] {
-  width: calc(50% - 10px);
-  height: 10px;
+  width: calc(100% - 20px);
+  height: 20px;
   padding: 10px;
-  margin: 5px;
-  border: 2px solid #fff;
+  margin: 5px 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.8);
-  transition: border 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  color: #fff;
 }
 
 input[type="number"]:focus,
 input[type="text"]:focus {
-  border: 2px solid #6a11cb;
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes fadeIn {
   0% {
     opacity: 0;
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .timer {
   color: #fff;
-  font-size: 6em;
+  font-size: 5em;
   font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  display: inline-flex; 
+  display: flex;
+  flex-direction: column;
   align-items: center;
   white-space: nowrap;
 }
@@ -229,20 +187,21 @@ input[type="text"]:focus {
   animation: pulse 2s infinite, zoomIn 0.5s;
 }
 
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
 @keyframes zoomIn {
   0% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1); /* Zoom in slightly */
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes zoomReset {
-  0% {
     transform: scale(1.1);
   }
   100% {
@@ -251,74 +210,42 @@ input[type="text"]:focus {
 }
 
 .progress-bar {
-  width: 80%;
-  height: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  margin-top: 10px;
+  width: 100%;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .progress {
   height: 100%;
-  background-color: #fff;
-  border-radius: 5px;
+  background-image: linear-gradient(to right, #6a11cb, #2575fc);
+  border-radius: 10px;
   width: 0%;
   transition: width 1s linear;
 }
 
-.buttons {
+.pomodoria-buttons {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.music {
-  margin-top: 40px;
-}
-
-.custom-timer {
-  position: fixed;
-  bottom: 3cm;
-  right: 1cm;
-}
-
-@media screen and (max-width: 768px) {
-  .app {
-    padding: 20px;
-  }
-
-  .timer {
-    font-size: 2em;
-  }
-
-  .music,
-  .settings,
-  .musicbutton {
-    bottom: 1cm;
-    right: 1cm;
-    left: unset;
-  }
-
-  .spotifylink input,
-  .spotifylink button {
-    width: 100%;
-  }
-
-  .music iframe {
-    width: 100%;
-    height: 200px;
-  }
-}
-
 .task-list {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 15cm;
-  margin-top: 20px;
+  width: 500px;
+  padding: 20px;
   position: fixed;
-  bottom: 1cm;
+  right: 20px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  color: #fff;
 }
 
 #tasks {
@@ -328,7 +255,7 @@ input[type="text"]:focus {
 
 #tasks li {
   padding: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -336,69 +263,68 @@ input[type="text"]:focus {
 
 #taskInput {
   width: 70%;
-  height: 40%;
-  padding: 10px;
-  border-radius: 20px;
-  border: 2px solid #fff;
   margin-right: 10px;
 }
 
-#addTaskButton {
-  padding: 10px 20px;
+.custom-timer {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
 }
 
 #currentTask {
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-}
-
-#currentTask.show {
-  display: block;
-}
-
-#tasks .completed span {
-  text-decoration: line-through;
-}
-
-#currentTask {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 20px;
-  display: none;
-}
-
-#currentTask.show {
-  display: block;
-}
-
-#currentTaskContainer {
-  margin-top: 20px;
-}
-
-
-#currentTask {
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 15px;
   border-radius: 10px;
   margin-top: 20px;
   display: flex;
   align-items: center;
   gap: 10px;
-  display: none;
+  backdrop-filter: blur(5px);
+  font-size: 0.3em;
 }
 
-#currentTask.show {
-  display: flex;
+#tasks .completed span {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
-
-.set-task-button {
-  margin-left: 10px;
+@media screen and (max-width: 768px) {
+  body {
+    zoom: 100%;
+  }
+  .title {
+    font-size: 2em;
+  }
+  .app {
+    padding: 20px;
+  }
+  .timer {
+    font-size: 4em;
+  }
+  .music iframe {
+    width: 100%;
+    height: 200px;
+  }
+  .task-list {
+    width: 90%;
+    max-width: 280px;
+  }
+  .button-container,
+  .settings,
+  .custom-timer,
+  .task-list,
+  .app.right {
+    position: static;
+    margin: 10px auto;
+  }
+  body {
+    overflow: auto;
+  }
 }
