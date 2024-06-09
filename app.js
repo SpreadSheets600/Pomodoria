@@ -31,6 +31,7 @@ const autoRestartCheckbox = document.getElementById("autoRestart");
 const changeBackgroundButton = document.getElementById("changeBackground");
 const settingsBox = document.querySelector(".settings-box");
 const clearTasksButton = document.getElementById("clearTasksButton");
+const customTimerButton = document.getElementById("customTimerButton");
 
 let currentTaskLi = null;
 
@@ -47,13 +48,11 @@ const backgroundVideos = [
   "Videos/10.mp4",
 ];
 
-function updateBackgroundVideo() {
+const updateBackgroundVideo = () => {
   const randomIndex = Math.floor(Math.random() * backgroundVideos.length);
   document.getElementById("backgroundVideo").src =
     backgroundVideos[randomIndex];
-}
-
-updateBackgroundVideo();
+};
 
 const updateTimerDisplay = () => {
   const minutes = Math.floor(totalSeconds / 60);
@@ -206,11 +205,14 @@ currentTaskCheckbox.addEventListener("change", () => {
 settingsButton.addEventListener("click", () => {
   settingsBox.classList.toggle("hide");
 });
-
 startButton.addEventListener("click", startTimer);
 stopButton.addEventListener("click", stopTimer);
 resetButton.addEventListener("click", resetTimer);
 setCustomTimerButton.addEventListener("click", setCustomTimer);
+
+customTimerButton.addEventListener("click", () => {
+  customTimer.classList.toggle("hide");
+})
 
 updateTimerDisplay();
 updateProgressBar();
@@ -261,9 +263,6 @@ autoRestartCheckbox.addEventListener("change", () => {
 
 changeBackgroundButton.addEventListener("click", updateBackgroundVideo);
 
-customTimerButton.addEventListener("click", () => {
-  customTimer.classList.toggle("hide");
-});
 
 // Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
