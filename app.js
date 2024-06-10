@@ -40,10 +40,6 @@ const backgroundVideos = [
   "Videos/4.mp4",
   "Videos/5.mp4",
   "Videos/6.mp4",
-  "Videos/7.mp4",
-  "Videos/8.mp4",
-  "Videos/9.mp4",
-  "Videos/10.mp4",
 ];
 
 const updateBackgroundVideo = () => {
