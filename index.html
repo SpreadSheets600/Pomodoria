@@ -16,7 +16,6 @@
       rel="stylesheet"
     />
   </head>
-
   <body>
     <div class="button-container">
       <div class="musicbutton" id="musicButton">
@@ -32,13 +31,19 @@
         <button id="customTimerButton">
           <span class="material-symbols-outlined">timer</span>
         </button>
+        <button id="pipButton">
+          <span class="material-symbols-outlined">picture_in_picture_alt</span>
+        </button>
       </div>
     </div>
+
     <video id="backgroundVideo" autoplay muted loop>
       <source src="Videos/1.mp4" type="video/mp4" />
       Your Browser Doesn't Support The Video Tag
     </video>
+
     <h1 class="title">Pomodoria</h1>
+
     <div class="app">
       <div class="timer">
         <span class="minutes-display">25:00</span>
@@ -52,6 +57,7 @@
         </div>
       </div>
     </div>
+
     <div class="task-list hide" id="taskList">
       <h2>Tasks</h2>
       <ul id="tasks"></ul>
@@ -60,11 +66,13 @@
         <span class="material-symbols-outlined">add_circle</span>
       </button>
     </div>
+
     <div class="settings">
       <button id="settingsButton">
         <span class="material-symbols-outlined">settings</span>
       </button>
     </div>
+
     <div class="music" id="musicBox">
       <div class="spotifylink">
         <input
@@ -77,29 +85,39 @@
       <iframe
         style="border-radius: 12px"
         id="playlistFrame"
+        src="https://open.spotify.com/embed/playlist/1SFu2TrODleauORe3TdSAv"
         width="425"
         height="425"
         frameborder="0"
         allowfullscreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         loading="lazy"
-      ></iframe>
+      >
+      </iframe>
     </div>
+
     <div class="custom-timer hide">
       <input type="number" id="customMinutes" placeholder="Minutes" />
       <input type="number" id="customSeconds" placeholder="Seconds" />
       <button id="setCustomTimer">Set Timer</button>
     </div>
+
     <div class="settings-box hide">
       <label for="autoRestart">Auto Restart</label>
       <input type="checkbox" id="autoRestart" />
     </div>
+
     <div id="currentTaskContainer">
       <div id="currentTask" class="hide">
         <input type="checkbox" id="currentTaskCheckbox" />
         <span id="currentTaskText"></span>
       </div>
     </div>
+
+    <video id="pipVideo" class="hidden" width="320" height="240" muted>
+      <canvas id="pipCanvas" width="320" height="240"></canvas>
+    </video>
+
     <script src="./app.js"></script>
   </body>
 </html>

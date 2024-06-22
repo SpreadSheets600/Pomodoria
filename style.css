@@ -328,3 +328,34 @@ input[type="text"]:focus {
     overflow: auto;
   }
 }
+
+#pipButton {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.pip-mode {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.pip-mode .timer {
+  font-size: 2em;
+}
+
+.pip-mode .progress-bar,
+.pip-mode .pomodoria-buttons {
+  display: none;
+}
