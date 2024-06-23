@@ -329,33 +329,30 @@ input[type="text"]:focus {
   }
 }
 
-#pipButton {
-  background-color: transparent;
-  border: none;
+#fullscreenButton {
+  background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
-  cursor: pointer;
-  font-size: 24px;
-}
-
-.pip-mode {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 200px;
-  height: 100px;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.pip-mode .timer {
-  font-size: 2em;
+#fullscreenButton:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
-.pip-mode .progress-bar,
-.pip-mode .pomodoria-buttons {
-  display: none;
+.fullscreen-active .material-symbols-outlined {
+  content: "fullscreen_exit";
+}
+
+#cycleCounter {
+  font-size: 1.2em;
+  color: #fff;
+  margin-top: 10px;
 }

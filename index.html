@@ -31,9 +31,10 @@
         <button id="customTimerButton">
           <span class="material-symbols-outlined">timer</span>
         </button>
-        <button id="pipButton">
-          <span class="material-symbols-outlined">picture_in_picture_alt</span>
+        <button id="fullscreenButton">
+          <span class="material-symbols-outlined">fullscreen</span>
         </button>
+        <div id="cycleCounter">Focus Count : <span>0</span></div>
       </div>
     </div>
 
@@ -105,6 +106,12 @@
     <div class="settings-box hide">
       <label for="autoRestart">Auto Restart</label>
       <input type="checkbox" id="autoRestart" />
+      <label for="notificationSound">Notification Sound</label>
+      <select id="notificationSound">
+        <option value="Music\Bell.mp3">Default</option>
+        <option value="Music\Bell.mp3">Bell</option>
+        <option value="Music\Chime.mp3">Chime</option>
+      </select>
     </div>
 
     <div id="currentTaskContainer">

@@ -3,6 +3,11 @@ let totalSeconds = 25 * 60;
 let isRunning = false;
 let autoRestart = false;
 
+let pomodoroCount = 0;
+const cycleCounter = document.querySelector("#cycleCounter span");
+
+const notificationSoundSelect = document.getElementById('notificationSound');
+
 const minutesDisplay = document.querySelector(".minutes-display");
 const progressBar = document.querySelector(".progress");
 const startButton = document.querySelector(".start");
@@ -71,7 +76,9 @@ const startTimer = () => {
       if (totalSeconds < 0) {
         clearInterval(timerInterval);
         isRunning = false;
-        new Audio("notification.mp3").play();
+        pomodoroCount++;
+        cycleCounter.textContent = pomodoroCount;
+        new Audio(notificationSoundSelect.value).play();
         if (autoRestart) {
           totalSeconds =
             parseInt(customMinutesInput.value || 25) * 60 +
@@ -259,6 +266,30 @@ window.addEventListener("DOMContentLoaded", () => {
   updateBackgroundVideo(); // Call updateBackgroundVideo on page load
 });
 
+const fullscreenButton = document.getElementById("fullscreenButton");
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch((e) => {
+      console.error(`Error attempting to enable fullscreen: ${e.message}`);
+    });
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+fullscreenButton.addEventListener("click", toggleFullscreen);
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    fullscreenButton.classList.add("fullscreen-active");
+  } else {
+    fullscreenButton.classList.remove("fullscreen-active");
+  }
+});
+
 // Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
   if (e.ctrlKey) {
@@ -278,6 +309,9 @@ document.addEventListener("keydown", (e) => {
       case "m":
         musicBox.style.display =
           musicBox.style.display === "none" ? "block" : "none";
+        break;
+      case "f":
+        toggleFullscreen();
         break;
     }
   }
