@@ -1,3 +1,6 @@
+# Stats
+![Alt](https://repobeats.axiom.co/api/embed/f4ad51087880e8778f211facd69439a13f01cb79.svg "Repobeats analytics image")
+
 # Pomodoria
 An Aesthetic Pomodoro Timer Built By Me And [Param](https://github.com/paramkhodiyar)
 
