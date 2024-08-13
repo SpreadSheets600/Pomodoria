@@ -1,6 +1,6 @@
 # Stats
 <div align="center">
- <a href="https://repobeats.axiom.co"><img src="https://repobeats.axiom.co/api/embed/f4ad51087880e8778f211facd69439a13f01cb79.svg" alt="GitHub Streak" /></a>
+ <a href="https://repobeats.axiom.co"><img src="https://repobeats.axiom.co/api/embed/bf9b31c77ced121da4318661d5a1fb952dbdd774.svg" alt="GitHub Streak" /></a>
 </div>
 
 # Pomodoria
